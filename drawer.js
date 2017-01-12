@@ -34,19 +34,19 @@ Drawer.prototype = {
 
 
 /**
- * CanvasDrawer
+ * HTMLCanvasDrawer
  * HTML canvas に描画するためのオブジェクト
  * id="field" というcanvasに描画する
  * @author  T.Kitajima
  * @version 0.9
  */
-function CanvasDrawer(){
+function HTMLCanvasDrawer(){
   Drawer.apply(this,arguments);
 }
-CanvasDrawer.prototype = Object.create(Drawer.prototype);
+HTMLCanvasDrawer.prototype = Object.create(Drawer.prototype);
 
 
-CanvasDrawer.prototype = {
+HTMLCanvasDrawer.prototype = {
 
     /**
      * ${inheritDoc}
@@ -78,4 +78,4 @@ CanvasDrawer.prototype = {
 };
 
 // HTML canvas に描画するオブジェクトを選択する
-var drawer = new CanvasDrawer();
+var drawer = new HTMLCanvasDrawer();
