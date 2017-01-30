@@ -18,13 +18,6 @@ window.onload = function() {
     // フィールドを作る
     master.makeField(w, h);
 
-    // フィールドに砂を撒く（オプション）
-    for(i=0; i<0; i++){
-        x = Math.floor(Math.random()*w);
-        y = Math.floor(Math.random()*h);
-        master.sowTheSand(x, y);
-    }
-
     // 蟻、登場（何匹でも）
     for(i=0; i<4; i++){
         // 開始位置と向きは、ランダムに指定することにする
@@ -32,6 +25,13 @@ window.onload = function() {
         y = Math.floor(Math.random()*h);
         d = Math.floor(Math.random()*4);
         master.putAnt(x, y, d);
+    }
+
+    // フィールドに砂を撒く（オプション）
+    for(i=0; i<200; i++){
+        x = Math.floor(Math.random()*w);
+        y = Math.floor(Math.random()*h);
+        master.sowTheSand(x, y);
     }
 
     // スタート

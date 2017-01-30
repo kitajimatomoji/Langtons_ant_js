@@ -23,20 +23,24 @@ Ant.prototype = {
     * @param Field field フィールドオブジェクト
     */
     goAhead : function(field) {
+
+        // 現在地のフィールドの色を反転する
+        field.turnOver(this.x, this.y);
+
         // 移動先座標を求め、一歩移動する
         var destination = field.getDestinationPoint(this.x, this.y, this.direction);
         this.x = destination[0];
         this.y = destination[1];
+
         // 移動先座標の色を調べる
         var color = field.getColor(this.x, this.y);
+        
         // 黒(false)なら左回転、白(true)なら右回転
         if (color){
             this._turnRight();
         }else{
             this._turnLeft();
         }
-        // 現在地のフィールドの色を反転する
-        field.turnOver(this.x, this.y);
     },
 
 
