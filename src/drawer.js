@@ -36,7 +36,7 @@ Drawer.prototype = {
 /**
  * HTMLCanvasDrawer
  * HTML canvas に描画するためのオブジェクト
- * id="field" というcanvasに描画する
+ * id="field" というdiv にcanvasを生成して描画する
  * @author  T.Kitajima
  * @version 0.9
  */
@@ -53,8 +53,9 @@ HTMLCanvasDrawer.prototype = {
      */
     initialize : function(width, height) {
 
-        // id="field" というcanvasに描画する、という仕様とする
-        canvas = document.getElementById('field');
+        let field = document.getElementById('field');
+        let canvas = document.createElement("canvas")
+        field.appendChild(canvas);
         canvas.width  = width;
         canvas.height = height;
         canvas.style.margin = '50px';
@@ -62,20 +63,81 @@ HTMLCanvasDrawer.prototype = {
         canvas.style.width  = CANVAS_WIDTH + 'px';
         //canvas.style.border = '1px solid #eeeeee';
 
-        context = canvas.getContext('2d');
-        context.fillStyle = 'rgb(44, 44, 44)';
-        context.fillRect(0, 0, width, height);
+        this.context = canvas.getContext('2d');
+        this.context.fillStyle = 'rgb(44, 44, 44)';
+        this.context.fillRect(0, 0, width, height);
     },
 
     /**
      * ${inheritDoc}
      */
     draw : function(x, y, isWhite){
-        var rgb = isWhite ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
-        context.fillStyle = rgb;
-        context.fillRect(x, y, 1, 1);
+        let rgb = isWhite ? 'rgb(255, 255, 255)' : 'rgb(44, 44, 44)';
+        this.context.fillStyle = rgb;
+        this.context.fillRect(x, y, 1, 1);
     }
 };
 
-// HTML canvas に描画するオブジェクトを選択する
+
+
+/**
+ * HTMLTableDrawer
+ * HTML table に描画するためのオブジェクト
+ * id="field" というdiv に table を生成して描画する
+ * @author  T.Kitajima
+ * @version 0.9
+ */
+function HTMLTableDrawer(){
+  Drawer.apply(this,arguments);
+}
+HTMLTableDrawer.prototype = Object.create(Drawer.prototype);
+
+
+HTMLTableDrawer.prototype = {
+
+    /**
+     * ${inheritDoc}
+     */
+    initialize : function(width, height) {
+
+        let field = document.getElementById('field');
+        let table = document.createElement("table")
+        field.appendChild(table);
+        table.width  = width;
+        table.height = height;
+        table.style.margin = '50px';
+        table.style.borderCollapse = 'collapse';
+        table.style.border = 'solid 1px';
+        table.style.height = (CANVAS_WIDTH * height / width) + 'px'; // 画面引き伸ばし
+        table.style.width  = CANVAS_WIDTH + 'px';
+        //canvas.style.border = '1px solid #eeeeee';
+
+        for(row=0; row<height; row++){
+            let tr = document.createElement("tr");
+            table.appendChild(tr);
+            for(column=0; column<width; column++){
+                let td = document.createElement("td");
+                td.id = row + '_' + column;
+                td.style.height = '1px'; // 画面引き伸ばし
+                td.style.width  = '1px';
+                td.style.border  = 'solid 1px';
+                td.style.borderColor  = 'rgb(0, 0, 0)';
+                td.style.backgroundColor = 'rgb(44, 44, 44)';
+                tr.appendChild(td);
+            }
+        }
+    },
+
+    /**
+     * ${inheritDoc}
+     */
+    draw : function(x, y, isWhite){
+        let rgb = isWhite ? 'rgb(255, 255, 255)' : 'rgb(44, 44, 44)';
+        let td = document.getElementById(x + '_' + y);
+        td.style.backgroundColor = rgb;
+    }
+};
+
+// 描画するオブジェクトを選択する
 var drawer = new HTMLCanvasDrawer();
+//var drawer = new HTMLTableDrawer();
