@@ -33,7 +33,7 @@ https://www.draw.io/
   Field クラスの実装です。
 
 - src/drawer.js
-  Drawer およびその派生クラスの HTMLCanvasDrawer クラスの実装です。
+  Drawer およびその派生クラスの HTMLCanvasDrawer / HTMLTableDrawer クラスの実装です。
 
 
 ## Author
