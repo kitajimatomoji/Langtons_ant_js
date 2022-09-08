@@ -2,6 +2,7 @@
 
 「ラングトンの蟻」のオブジェクト指向モデリング（クラス図、シーケンス図）と、その検証のための実装サンプルです。
 
+[GitHub Pages](https://kitajimatomoji.github.io/Langtons_ant_js/src/)
 
 ## Description
 
